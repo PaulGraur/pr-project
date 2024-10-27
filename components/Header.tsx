@@ -30,16 +30,11 @@ const Header: React.FC = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("isAuthenticated");
-    setIsAuthenticated(false);
     window.location.reload();
   };
 
   const toggleMenu = () => {
-    if (isAuthenticated) {
-      setIsMenuOpen((prev) => !prev);
-    } else {
-      setShowAuthModal(true);
-    }
+    setIsMenuOpen((prev) => !prev);
   };
 
   return (
@@ -47,7 +42,7 @@ const Header: React.FC = () => {
       <div className="rounded-[32px] bg-white w-full p-4 flex justify-between items-center shadow-md">
         <div className="flex items-center">
           <Link href={"/"}>
-            <Image src={Logo} alt="Logo" className="w-[60px] xl:w-[100px]" />
+            <Image src={Logo} alt="Logo" className="w-[100px]" />
           </Link>
           <span className="font-bold text-[20px]">&</span>
           <Link href={"/"} className="ml-[12px]">
@@ -58,10 +53,9 @@ const Header: React.FC = () => {
             />
           </Link>
         </div>
-        <div className="flex items-center space-x-4">
-          <div className="flex items-center gap-[12px] md:hidden">
-            <Image src={Mops} alt="Mops" className="w-[40px] xl:w-[80px]" />
 
+        <div className="flex items-center space-x-4">
+          <div className="md:hidden">
             <button
               onClick={toggleMenu}
               className="text-black focus:outline-none z-[1000] relative"
@@ -69,22 +63,20 @@ const Header: React.FC = () => {
               {isMenuOpen ? <FiX size={28} /> : <FiMenu size={28} />}
             </button>
           </div>
-          {isAuthenticated && (
-            <>
-              <Image
-                src={Mops}
-                alt="Mops"
-                className="hidden w-[40px] xl:w-[80px] md:block"
-              />
+          <>
+            <Image
+              src={Mops}
+              alt="Mops"
+              className="hidden w-[40px] xl:w-[80px] md:block"
+            />
 
-              <button
-                onClick={handleLogout}
-                className="hidden md:block text-black px-4 py-2 rounded-[32px]"
-              >
-                Вийти
-              </button>
-            </>
-          )}
+            <button
+              onClick={handleLogout}
+              className="hidden md:block text-black px-4 py-2 rounded-[32px]"
+            >
+              Вийти
+            </button>
+          </>
         </div>
       </div>
 
@@ -100,21 +92,24 @@ const Header: React.FC = () => {
           isMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
+        {/* <button
+          onClick={toggleMenu}
+          className="text-gray-500 hover:text-gray-700 focus:outline-none"
+        >
+          <FiX size={24} />
+        </button> */}
         <nav className="flex flex-col divide-y divide-gray-300 mt-4">
           {navigationLinks.map((link, index) => (
-            <>
-              <Link href={link.href} key={index}>
-                <div
-                  className="text-base text-gray-700 py-4 hover:text-blue-500 transition duration-300"
-                  onClick={toggleMenu}
-                >
-                  {link.title}
-                </div>
-              </Link>
-            </>
+            <Link href={link.href} key={index}>
+              <div
+                className="text-base text-gray-700 py-4 hover:text-blue-500 transition duration-300"
+                onClick={toggleMenu}
+              >
+                {link.title}
+              </div>
+            </Link>
           ))}
         </nav>
-
         <button
           onClick={() => {
             handleLogout();
@@ -125,40 +120,6 @@ const Header: React.FC = () => {
           Вийти
         </button>
       </div>
-
-      {showAuthModal && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center"
-          onClick={() => setShowAuthModal(false)}
-        >
-          <div
-            className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <h3 className="text-xl font-semibold mb-4 text-center text-gray-800">
-              Для доступу до меню, будь ласка, увійдіть або зареєструйтесь
-            </h3>
-            <div className="flex justify-center space-x-4">
-              <Link href="/login">
-                <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-200">
-                  Увійти
-                </button>
-              </Link>
-              <Link href="/register">
-                <button className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition duration-200">
-                  Зареєструватися
-                </button>
-              </Link>
-            </div>
-            <button
-              onClick={() => setShowAuthModal(false)}
-              className="mt-4 text-gray-500 hover:text-gray-700 w-full text-center transition duration-200"
-            >
-              Скасувати
-            </button>
-          </div>
-        </div>
-      )}
     </header>
   );
 };
