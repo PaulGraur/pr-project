@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import CustomOption from "@/components/CustomOption";
 import Modal from "@/components/Modal";
+import OptionContent from "@/components/OptionContent";
 
 interface Option {
   title: string;
@@ -68,7 +69,7 @@ const OptionSection: React.FC = () => {
         </div>
         {selectedOption && (
           <Modal title={selectedOption.title} onClose={closeModal}>
-            <p className="text-gray-700 text-lg">{selectedOption.content}</p>
+            <OptionContent option={selectedOption} onClose={closeModal} />
           </Modal>
         )}
       </div>
