@@ -58,29 +58,27 @@ const categories = ["Всі", "Лідерство", "Тайм-менеджмен
 
 const InstituteProfessionalsSection: React.FC = () => {
   const [trainings, setTrainings] = useState<Training[]>(sampleTrainings);
-  const [selectedTraining, setSelectedTraining] = useState<Training | null>(
-    null
-  );
+  const [expandedTrainingIds, setExpandedTrainingIds] = useState<number[]>([]);
   const [selectedCategory, setSelectedCategory] = useState("Всі");
   const [newFeedback, setNewFeedback] = useState("");
   const [newQuestion, setNewQuestion] = useState("");
   const [favorites, setFavorites] = useState<number[]>([]);
   const [sortOption, setSortOption] = useState("rating");
 
-  const handleSelectTraining = (training: Training) => {
-    setSelectedTraining(training);
+  const toggleTrainingExpansion = (id: number) => {
+    setExpandedTrainingIds((prev) =>
+      prev.includes(id) ? prev.filter((expId) => expId !== id) : [...prev, id]
+    );
   };
 
-  const handleAddFeedback = () => {
-    if (selectedTraining && newFeedback.trim()) {
-      const updatedTrainings = trainings.map((training) =>
-        training.id === selectedTraining.id
-          ? { ...training, feedbacks: [...training.feedbacks, newFeedback] }
-          : training
-      );
-      setTrainings(updatedTrainings);
-      setNewFeedback("");
-    }
+  const handleAddFeedback = (trainingId: number) => {
+    const updatedTrainings = trainings.map((training) =>
+      training.id === trainingId && newFeedback.trim()
+        ? { ...training, feedbacks: [...training.feedbacks, newFeedback] }
+        : training
+    );
+    setTrainings(updatedTrainings);
+    setNewFeedback("");
   };
 
   const handleToggleFavorite = (id: number) => {
@@ -91,34 +89,30 @@ const InstituteProfessionalsSection: React.FC = () => {
     );
   };
 
-  const handleRegister = () => {
-    if (selectedTraining) {
-      const updatedTrainings = trainings.map((training) =>
-        training.id === selectedTraining.id
-          ? { ...training, isRegistered: true }
-          : training
-      );
-      setTrainings(updatedTrainings);
-      alert("Ви зареєстровані на тренінг!");
-    }
+  const handleRegister = (trainingId: number) => {
+    const updatedTrainings = trainings.map((training) =>
+      training.id === trainingId
+        ? { ...training, isRegistered: true }
+        : training
+    );
+    setTrainings(updatedTrainings);
+    alert("Ви зареєстровані на тренінг!");
   };
 
-  const handleAddQuestion = () => {
-    if (selectedTraining && newQuestion.trim()) {
-      const updatedTrainings = trainings.map((training) =>
-        training.id === selectedTraining.id
-          ? {
-              ...training,
-              questions: [
-                ...training.questions,
-                { question: newQuestion, answers: [] },
-              ],
-            }
-          : training
-      );
-      setTrainings(updatedTrainings);
-      setNewQuestion("");
-    }
+  const handleAddQuestion = (trainingId: number) => {
+    const updatedTrainings = trainings.map((training) =>
+      training.id === trainingId && newQuestion.trim()
+        ? {
+            ...training,
+            questions: [
+              ...training.questions,
+              { question: newQuestion, answers: [] },
+            ],
+          }
+        : training
+    );
+    setTrainings(updatedTrainings);
+    setNewQuestion("");
   };
 
   const filteredTrainings = trainings.filter((training) =>
@@ -166,7 +160,7 @@ const InstituteProfessionalsSection: React.FC = () => {
             <div
               key={training.id}
               className="p-4 border border-gray-300 rounded-lg hover:shadow-lg transition cursor-pointer relative"
-              onClick={() => handleSelectTraining(training)}
+              onClick={() => toggleTrainingExpansion(training.id)}
             >
               <h3 className="text-lg font-semibold text-blue-700">
                 {training.title}
@@ -187,86 +181,101 @@ const InstituteProfessionalsSection: React.FC = () => {
               >
                 {favorites.includes(training.id) ? "★" : "☆"}
               </button>
+
+              {expandedTrainingIds.includes(training.id) && (
+                <div className="mt-6 p-4 bg-white rounded-lg shadow-lg">
+                  <h3 className="text-xl font-bold text-blue-700">
+                    {training.title}
+                  </h3>
+                  <p className="text-gray-700 mt-2">{training.description}</p>
+                  <p className="text-gray-500 mt-2">
+                    Дата проведення: {training.date}
+                  </p>
+                  {training.isRegistered ? (
+                    <p className="text-green-600 font-semibold mt-4">
+                      Ви зареєстровані на цей тренінг
+                    </p>
+                  ) : (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleRegister(training.id);
+                      }}
+                      className="mt-4 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition duration-300"
+                    >
+                      Зареєструватися
+                    </button>
+                  )}
+
+                  <div className="mt-4">
+                    <h4 className="text-lg font-semibold">Відгуки:</h4>
+                    {training.feedbacks.map((feedback, index) => (
+                      <p key={index} className="text-gray-600 border-b py-1">
+                        {feedback}
+                      </p>
+                    ))}
+                    <textarea
+                      value={newFeedback}
+                      onChange={(e) => setNewFeedback(e.target.value)}
+                      className="w-full mt-4 p-2 border rounded-lg"
+                      placeholder="Залиште ваш відгук..."
+                    />
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleAddFeedback(training.id);
+                      }}
+                      className="mt-2 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300"
+                    >
+                      Додати відгук
+                    </button>
+                  </div>
+
+                  <div className="mt-4">
+                    <h4 className="text-lg font-semibold">
+                      Питання та відповіді:
+                    </h4>
+                    {training.questions.map((q, idx) => (
+                      <div key={idx} className="border-b py-2">
+                        <p className="font-semibold">{q.question}</p>
+                        {q.answers.map((ans, idx2) => (
+                          <p key={idx2} className="text-gray-600 pl-4">
+                            - {ans}
+                          </p>
+                        ))}
+                      </div>
+                    ))}
+                    <textarea
+                      value={newQuestion}
+                      onChange={(e) => setNewQuestion(e.target.value)}
+                      className="w-full mt-2 p-2 border rounded-lg"
+                      placeholder="Задайте питання..."
+                    />
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleAddQuestion(training.id);
+                      }}
+                      className="mt-2 bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600 transition duration-300"
+                    >
+                      Додати питання
+                    </button>
+                  </div>
+
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleTrainingExpansion(training.id);
+                    }}
+                    className="mt-4 bg-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-400 transition duration-300"
+                  >
+                    Закрити
+                  </button>
+                </div>
+              )}
             </div>
           ))}
         </div>
-        {selectedTraining && (
-          <div className="mt-6 p-4 bg-white rounded-lg shadow-lg">
-            <h3 className="text-xl font-bold text-blue-700">
-              {selectedTraining.title}
-            </h3>
-            <p className="text-gray-700 mt-2">{selectedTraining.description}</p>
-            <p className="text-gray-500 mt-2">
-              Дата проведення: {selectedTraining.date}
-            </p>
-            {selectedTraining.isRegistered ? (
-              <p className="text-green-600 font-semibold mt-4">
-                Ви зареєстровані на цей тренінг
-              </p>
-            ) : (
-              <button
-                onClick={handleRegister}
-                className="mt-4 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition duration-300"
-              >
-                Зареєструватися
-              </button>
-            )}
-
-            <div className="mt-4">
-              <h4 className="text-lg font-semibold">Відгуки:</h4>
-              {selectedTraining.feedbacks.map((feedback, index) => (
-                <p key={index} className="text-gray-600 border-b py-1">
-                  {feedback}
-                </p>
-              ))}
-              <textarea
-                value={newFeedback}
-                onChange={(e) => setNewFeedback(e.target.value)}
-                className="w-full mt-4 p-2 border rounded-lg"
-                placeholder="Залиште ваш відгук..."
-              />
-              <button
-                onClick={handleAddFeedback}
-                className="mt-2 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300"
-              >
-                Додати відгук
-              </button>
-            </div>
-
-            <div className="mt-4">
-              <h4 className="text-lg font-semibold">Питання та відповіді:</h4>
-              {selectedTraining.questions.map((q, idx) => (
-                <div key={idx} className="border-b py-2">
-                  <p className="font-semibold">{q.question}</p>
-                  {q.answers.map((ans, idx2) => (
-                    <p key={idx2} className="text-gray-600 pl-4">
-                      - {ans}
-                    </p>
-                  ))}
-                </div>
-              ))}
-              <textarea
-                value={newQuestion}
-                onChange={(e) => setNewQuestion(e.target.value)}
-                className="w-full mt-2 p-2 border rounded-lg"
-                placeholder="Задайте питання..."
-              />
-              <button
-                onClick={handleAddQuestion}
-                className="mt-2 bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600 transition duration-300"
-              >
-                Додати питання
-              </button>
-            </div>
-
-            <button
-              onClick={() => setSelectedTraining(null)}
-              className="mt-4 bg-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-400 transition duration-300"
-            >
-              Закрити
-            </button>
-          </div>
-        )}
       </div>
     </section>
   );

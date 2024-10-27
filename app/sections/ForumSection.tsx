@@ -149,32 +149,34 @@ const ForumSection: React.FC = () => {
   );
 
   return (
-    <section className="container mt-[40px] xl:mt-[100px]">
-      <h2 className="text-4xl font-extrabold text-center mb-10 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-green-600">
-        Форум
-      </h2>
-      <div className="bg-white p-6 rounded-lg shadow-lg mb-6">
-        <input
-          type="text"
-          value={author}
-          onChange={(e) => setAuthor(e.target.value)}
-          placeholder="Ваше ім'я"
-          className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-        />
-        <textarea
-          value={newPost}
-          onChange={(e) => setNewPost(e.target.value)}
-          className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-          placeholder="Напишіть ваше повідомлення..."
-        />
-        <button
-          onClick={() => handleAddPost()}
-          className="mt-4 w-full bg-gradient-to-r from-indigo-500 to-blue-500 text-white font-semibold py-2 rounded-md shadow-lg hover:from-indigo-600 hover:to-blue-600 transition duration-300"
-        >
-          Додати повідомлення
-        </button>
+    <section className="container">
+      <div className="p-6 max-w-5xl mx-auto bg-gradient-to-r from-green-50 to-blue-50 rounded-[32px] shadow-xl">
+        <h2 className="text-4xl font-extrabold text-center mb-10 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-green-600">
+          Форум
+        </h2>
+        <div className="bg-white p-6 rounded-lg shadow-lg mb-6">
+          <input
+            type="text"
+            value={author}
+            onChange={(e) => setAuthor(e.target.value)}
+            placeholder="Ваше ім'я"
+            className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+          <textarea
+            value={newPost}
+            onChange={(e) => setNewPost(e.target.value)}
+            className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+            placeholder="Напишіть ваше повідомлення..."
+          />
+          <button
+            onClick={() => handleAddPost()}
+            className="mt-4 w-full bg-gradient-to-r from-indigo-500 to-blue-500 text-white font-semibold py-2 rounded-md shadow-lg hover:from-indigo-600 hover:to-blue-600 transition duration-300"
+          >
+            Додати повідомлення
+          </button>
+        </div>
+        <div>{posts.map((post) => renderPost(post))}</div>
       </div>
-      <div>{posts.map((post) => renderPost(post))}</div>
     </section>
   );
 };
