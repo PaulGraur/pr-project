@@ -46,7 +46,11 @@ const OptionSection: React.FC = () => {
   const [selectedOption, setSelectedOption] = useState<Option | null>(null);
 
   const handleOptionClick = (option: Option) => {
-    if (option.title !== "Форум" && option.title !== "Клієнтська підтримка") {
+    if (
+      option.title !== "Форум" &&
+      option.title !== "Клієнтська підтримка" &&
+      option.title !== "Інститут професіоналів"
+    ) {
       setSelectedOption(option);
     }
   };
@@ -69,6 +73,10 @@ const OptionSection: React.FC = () => {
               </Link>
             ) : option.title === "Клієнтська підтримка" ? (
               <Link href="/support-page" key={index}>
+                <CustomOption title={option.title} onClick={() => {}} />
+              </Link>
+            ) : option.title === "Інститут професіоналів" ? (
+              <Link href="/institute-professionals" key={index}>
                 <CustomOption title={option.title} onClick={() => {}} />
               </Link>
             ) : (
