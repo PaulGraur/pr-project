@@ -56,6 +56,39 @@ const sampleTrainings: Training[] = [
 
 const categories = ["Всі", "Лідерство", "Тайм-менеджмент", "Проекти"];
 
+const projectList = [
+  {
+    name: "Безпечне партнерство",
+    colorClass: "bg-blue-100",
+    textColorClass: "text-blue-700",
+  },
+  {
+    name: "МоПоМо",
+    colorClass: "bg-green-100",
+    textColorClass: "text-green-700",
+  },
+  {
+    name: "Обнімашки",
+    colorClass: "bg-yellow-100",
+    textColorClass: "text-yellow-700",
+  },
+  {
+    name: "Консультації Сергій",
+    colorClass: "bg-purple-100",
+    textColorClass: "text-purple-700",
+  },
+  {
+    name: "Консультації Войтек",
+    colorClass: "bg-pink-100",
+    textColorClass: "text-pink-700",
+  },
+  {
+    name: "Шлях до партнерства",
+    colorClass: "bg-indigo-100",
+    textColorClass: "text-indigo-700",
+  },
+];
+
 const InstituteProfessionalsSection: React.FC = () => {
   const [trainings, setTrainings] = useState<Training[]>(sampleTrainings);
   const [expandedTrainingIds, setExpandedTrainingIds] = useState<number[]>([]);
@@ -131,9 +164,35 @@ const InstituteProfessionalsSection: React.FC = () => {
         <h2 className="text-2xl font-bold text-green-700 mb-6 text-center">
           Інститут професіоналів
         </h2>
+
         <p className="text-gray-700 mb-4 text-center">
           Розвиток навичок та компетенцій для професійного зростання.
         </p>
+
+        <div className="bg-white p-6 rounded-[32px] shadow-lg mx-auto mb-[40px]">
+          <h3 className="text-2xl font-semibold text-green-700 mb-4 text-center">
+            Проєкти МоМо на платформу:
+          </h3>
+
+          <ul className="space-y-3 list-none">
+            {projectList.map((project, index) => (
+              <li
+                key={index}
+                className={`flex items-center p-3 ${
+                  project.colorClass
+                } rounded-[32px] shadow-sm hover:${project.colorClass.replace(
+                  "100",
+                  "200"
+                )} transition duration-200`}
+              >
+                <span className={`${project.textColorClass} font-medium`}>
+                  {project.name}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
         <div className="flex flex-wrap gap-[14px] justify-center mb-6">
           <select
             value={selectedCategory}

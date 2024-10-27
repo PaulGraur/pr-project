@@ -16,7 +16,6 @@ const SupportSection: React.FC = () => {
   const [newMessage, setNewMessage] = useState("");
   const [onlineStatus, setOnlineStatus] = useState(true);
 
-  // Зміна типізації для об'єкта quickReplies
   const quickReplies: Record<string, string> = {
     "Як швидко я отримаю відповідь?":
       "Ми відповідаємо протягом декількох хвилин у робочий час.",
