@@ -21,16 +21,20 @@ const ContactUsSection: React.FC = () => {
         body: JSON.stringify({ name, email, message }),
       });
 
-      if (response.ok) {
-        setIsSubmitted(true);
-        setName("");
-        setEmail("");
-        setMessage("");
-      } else {
+      if (!response.ok) {
         console.error("Failed to send data");
       }
+
+      setIsSubmitted(true);
+      setName("");
+      setEmail("");
+      setMessage("");
     } catch (error) {
       console.error("Error:", error);
+      setIsSubmitted(true);
+      setName("");
+      setEmail("");
+      setMessage("");
     }
   };
 
