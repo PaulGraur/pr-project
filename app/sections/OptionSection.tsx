@@ -67,11 +67,8 @@ const OptionSection: React.FC = () => {
   };
 
   return (
-    <section className="flex flex-col items-center px-4">
-      <div className="container flex flex-col items-center text-center">
-        <h1 className="text-4xl font-extrabold text-green-800 text-center mb-12 tracking-tight">
-          Безпечна платформа для досягнення цілей
-        </h1>
+    <section className="container">
+      <div className="flex flex-col items-center text-center bg-gradient-to-r from-green-500 via-blue-500 to-purple-500 py-20 px-6 rounded-[32px]">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-6xl">
           {options.map((option, index) =>
             option.link ? (

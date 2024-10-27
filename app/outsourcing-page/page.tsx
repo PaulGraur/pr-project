@@ -1,11 +1,13 @@
 import React from "react";
 import OutsourcingSection from "@/app/sections/OutsourcingSection";
+import ContactUsSection from "@/app/sections/ContactUsSection";
 
 const OutsourcingPage: React.FC = () => {
   return (
-    <main className="p-8">
+    <>
       <OutsourcingSection />
-    </main>
+      <ContactUsSection />
+    </>
   );
 };
 

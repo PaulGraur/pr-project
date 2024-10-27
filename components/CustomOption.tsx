@@ -14,7 +14,7 @@ const CustomOption: React.FC<CustomOptionProps> = ({
   return (
     <div
       onClick={onClick}
-      className={`${className} cursor-pointer text-gray-800 hover:text-white font-semibold transition-all duration-300 rounded-lg transform hover:scale-105`}
+      className={`${className} flex justify-center items-center cursor-pointer text-gray-800 hover:text-white font-semibold transition-all duration-300 rounded-lg transform hover:scale-105 mini:h-[128px]`}
     >
       <h3 className="text-xl font-bold">{title}</h3>
     </div>
