@@ -150,7 +150,7 @@ const ForumSection: React.FC = () => {
 
   return (
     <section className="container">
-      <div className="p-6 max-w-5xl mx-auto bg-gradient-to-r from-green-50 to-blue-50 rounded-[32px] shadow-xl">
+      <div className="p-6 bg-gradient-to-r from-green-50 to-blue-50 rounded-[32px] shadow-xl">
         <h2 className="text-4xl font-extrabold text-center mb-10 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-green-600">
           Форум
         </h2>

@@ -64,7 +64,7 @@ const PaymentSecuritySection: React.FC = () => {
 
   return (
     <section className="container">
-      <div className="bg-gradient-to-br from-green-50 to-blue-50 p-8 rounded-[32px] shadow-lg max-w-4xl mx-auto">
+      <div className="bg-gradient-to-br from-green-50 to-blue-50 p-8 rounded-[32px] shadow-lg">
         <h2 className="text-3xl font-bold text-green-800 mb-4 text-center">
           Безпека розрахунків
         </h2>
