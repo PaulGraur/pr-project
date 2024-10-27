@@ -50,7 +50,8 @@ const OptionSection: React.FC = () => {
       option.title !== "Форум" &&
       option.title !== "Клієнтська підтримка" &&
       option.title !== "Інститут професіоналів" &&
-      option.title !== "Бізнес коучинг"
+      option.title !== "Бізнес коучинг" &&
+      option.title !== "Безпека розрахунків"
     ) {
       setSelectedOption(option);
     }
@@ -82,6 +83,10 @@ const OptionSection: React.FC = () => {
               </Link>
             ) : option.title === "Бізнес коучинг" ? (
               <Link href="/business-coaching" key={index}>
+                <CustomOption title={option.title} onClick={() => {}} />
+              </Link>
+            ) : option.title === "Безпека розрахунків" ? (
+              <Link href="/payment-security" key={index}>
                 <CustomOption title={option.title} onClick={() => {}} />
               </Link>
             ) : (

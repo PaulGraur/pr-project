@@ -17,7 +17,8 @@
 }
 
 .bg-custom-gradient {
-  background-image: linear-gradient(to bottom right, #bbf7d0, #bfdbfe);
+  /* background-image: linear-gradient(to bottom right, #bbf7d0, #bfdbfe); */
+  background-color: #bbf7d0;
 }
 
 html {
