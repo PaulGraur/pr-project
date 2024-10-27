@@ -12,14 +12,18 @@ const AuthForm: React.FC<AuthFormProps> = ({ onAuthSuccess }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isRegistering, setIsRegistering] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState("");
   const [info, setInfo] = useState("");
+  const [isAgreed, setIsAgreed] = useState(false);
 
   const validateInputs = () => {
     if (!username) return "Ім'я користувача не може бути порожнім";
     if (password.length < 6) return "Пароль має містити щонайменше 6 символів";
     if (isRegistering && password !== confirmPassword)
       return "Паролі не співпадають";
+    if (isRegistering && !isAgreed)
+      return "Ви повинні погодитися з умовами використання";
     return "";
   };
 
@@ -55,10 +59,10 @@ const AuthForm: React.FC<AuthFormProps> = ({ onAuthSuccess }) => {
   };
 
   return (
-    <div className="container flex justify-center items-center mt-[60px] xl:mt-[100px]">
+    <div className="container flex justify-center items-center">
       <form
         onSubmit={handleAuth}
-        className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md transform transition-all hover:shadow-3xl"
+        className="bg-white p-8 rounded-[32px] shadow-2xl w-full max-w-md transform transition-all hover:shadow-3xl"
       >
         <h2 className="text-3xl font-extrabold text-center text-gradient bg-gradient-to-r from-green-600 to-blue-600 text-transparent bg-clip-text mb-8">
           {isRegistering ? "Реєстрація" : "Вхід"}
@@ -102,22 +106,59 @@ const AuthForm: React.FC<AuthFormProps> = ({ onAuthSuccess }) => {
         </div>
 
         {isRegistering && (
-          <div className="mb-6">
-            <label className="block text-gray-700 font-semibold mb-2">
-              Підтвердження пароля
-            </label>
-            <input
-              type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 shadow-sm transition duration-300"
-            />
-          </div>
+          <>
+            <div className="mb-6 relative">
+              <label className="block text-gray-700 font-semibold mb-2">
+                Підтвердження пароля
+              </label>
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 shadow-sm transition duration-300"
+              />
+              <button
+                type="button"
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                className="absolute right-3 top-[56px] transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+              >
+                {showConfirmPassword ? (
+                  <AiOutlineEyeInvisible size={24} />
+                ) : (
+                  <AiOutlineEye size={24} />
+                )}
+              </button>
+            </div>
+
+            <div className="mb-6 flex items-center">
+              <div
+                className={`w-24 h-6 flex items-center bg-gray-300 rounded-full p-1 cursor-pointer ${
+                  isAgreed ? "bg-green-500" : ""
+                }`}
+                onClick={() => setIsAgreed(!isAgreed)}
+              >
+                <div
+                  className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform ${
+                    isAgreed ? "translate-x-6" : ""
+                  }`}
+                />
+              </div>
+              <label className="ml-3 text-gray-700">
+                Я погоджуюся з умовами використання та підтверджую підтримку
+                платформи.
+              </label>
+            </div>
+          </>
         )}
 
         <button
           type="submit"
-          className="w-full bg-gradient-to-r from-green-500 to-blue-500 text-white font-bold py-3 rounded-lg hover:from-green-600 hover:to-blue-600 transition duration-300 shadow-md hover:shadow-lg"
+          disabled={isRegistering && !isAgreed} 
+          className={`w-full font-bold py-3 rounded-lg transition duration-300 shadow-md hover:shadow-lg ${
+            isRegistering && !isAgreed
+              ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+              : "bg-gradient-to-r from-green-500 to-blue-500 text-white hover:from-green-600 hover:to-blue-600"
+          }`}
         >
           {isRegistering ? "Зареєструватися" : "Увійти"}
         </button>
