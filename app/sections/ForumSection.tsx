@@ -88,7 +88,7 @@ const ForumSection: React.FC = () => {
   const renderPost = (post: Post, isReply = false) => (
     <div
       key={post.id}
-      className={`p-4 mb-4 bg-white rounded-lg shadow-md border-l-4 ${
+      className={`p-4 mb-4 bg-white rounded-[32px] shadow-md border-l-4 ${
         isReply ? "ml-8 border-blue-300" : "border-blue-500"
       }`}
     >
@@ -154,7 +154,7 @@ const ForumSection: React.FC = () => {
         <h2 className="text-4xl font-extrabold text-center mb-10 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-green-600">
           Форум
         </h2>
-        <div className="bg-white p-6 rounded-lg shadow-lg mb-6">
+        <div className="bg-white p-6 rounded-[32px] shadow-lg mb-6">
           <input
             type="text"
             value={author}

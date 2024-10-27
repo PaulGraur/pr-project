@@ -82,12 +82,12 @@ const PaymentSecuritySection: React.FC = () => {
             placeholder="Пошук..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 mb-4"
+            className="w-full p-3 border rounded-[32px] focus:outline-none focus:ring-2 focus:ring-green-400 mb-4"
           />
           <div className="space-y-4">
             {filteredFAQs.length > 0 ? (
               filteredFAQs.map((faq, idx) => (
-                <div key={idx} className="p-4 bg-white rounded-lg shadow-md">
+                <div key={idx} className="p-4 bg-white rounded-[32px] shadow-md">
                   <p className="font-semibold">{faq.question}</p>
                   <p className="text-gray-600 mt-1">{faq.answer}</p>
                 </div>
@@ -104,7 +104,7 @@ const PaymentSecuritySection: React.FC = () => {
           <textarea
             value={newFeedback}
             onChange={(e) => setNewFeedback(e.target.value)}
-            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 mb-2"
+            className="w-full p-3 border rounded-[32px] focus:outline-none focus:ring-2 focus:ring-green-400 mb-2"
             placeholder="Поділіться своїм досвідом..."
           />
           <div className="flex items-center mb-4">
@@ -123,7 +123,7 @@ const PaymentSecuritySection: React.FC = () => {
           </div>
           <button
             onClick={handleAddFeedback}
-            className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition duration-300"
+            className="bg-green-500 text-white px-4 py-2 rounded-[32px] hover:bg-green-600 transition duration-300"
           >
             Надіслати відгук
           </button>
@@ -139,7 +139,7 @@ const PaymentSecuritySection: React.FC = () => {
               onChange={(e) =>
                 setSortOrder(e.target.value as "newest" | "oldest")
               }
-              className="border rounded-lg p-2"
+              className="border rounded-[32px] p-2"
             >
               <option value="newest">Новіші</option>
               <option value="oldest">Старіші</option>
@@ -150,7 +150,7 @@ const PaymentSecuritySection: React.FC = () => {
               sortedFeedbacks.map((feedback) => (
                 <div
                   key={feedback.id}
-                  className="p-4 bg-white rounded-lg shadow-md"
+                  className="p-4 bg-white rounded-[32px] shadow-md"
                 >
                   <div className="flex items-center justify-between">
                     <p className="font-semibold">{feedback.user}</p>

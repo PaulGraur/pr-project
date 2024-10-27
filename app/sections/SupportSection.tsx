@@ -70,14 +70,14 @@ const SupportSection: React.FC = () => {
           </span>
         </div>
 
-        <div className="h-80 overflow-y-auto mb-4 p-2 bg-white rounded-lg shadow-inner">
+        <div className="h-80 overflow-y-auto mb-4 p-2 bg-white rounded-[32px] shadow-inner">
           {messages.map((message) => (
             <motion.div
               key={message.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
-              className={`mb-2 p-2 rounded-lg ${
+              className={`mb-2 p-2 rounded-[32px] ${
                 message.sender === "user"
                   ? "bg-blue-100 text-right"
                   : message.sender === "support"
