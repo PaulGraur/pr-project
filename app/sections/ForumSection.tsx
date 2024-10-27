@@ -100,7 +100,7 @@ const ForumSection: React.FC = () => {
         <textarea
           value={editContent}
           onChange={(e) => setEditContent(e.target.value)}
-          className="w-full px-3 py-2 mt-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-300"
+          className="w-full px-3 py-2 mt-2 border rounded-[32px] focus:outline-none focus:ring-2 focus:ring-indigo-300"
         />
       ) : (
         <p className="mt-2 text-gray-800">{post.content}</p>
@@ -160,17 +160,17 @@ const ForumSection: React.FC = () => {
             value={author}
             onChange={(e) => setAuthor(e.target.value)}
             placeholder="Ваше ім'я"
-            className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-[32px] focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
           <textarea
             value={newPost}
             onChange={(e) => setNewPost(e.target.value)}
-            className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="w-full px-4 py-3 border border-gray-300 rounded-[32px] focus:outline-none focus:ring-2 focus:ring-blue-400"
             placeholder="Напишіть ваше повідомлення..."
           />
           <button
             onClick={() => handleAddPost()}
-            className="mt-4 w-full bg-gradient-to-r from-indigo-500 to-blue-500 text-white font-semibold py-2 rounded-md shadow-lg hover:from-indigo-600 hover:to-blue-600 transition duration-300"
+            className="mt-4 w-full bg-gradient-to-r from-indigo-500 to-blue-500 text-white font-semibold py-2 rounded-[32px] shadow-lg hover:from-indigo-600 hover:to-blue-600 transition duration-300"
           >
             Додати повідомлення
           </button>

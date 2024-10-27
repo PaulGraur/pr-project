@@ -76,7 +76,7 @@ const OptionSection: React.FC = () => {
                 <CustomOption
                   title={option.title}
                   onClick={() => {}}
-                  className="bg-gradient-to-br from-green-300 via-blue-200 to-purple-300 text-center p-8 rounded-xl shadow-lg transform transition-transform hover:scale-105 hover:shadow-2xl"
+                  className="bg-gradient-to-br from-green-300 via-blue-200 to-purple-300 text-center p-8 rounded-[32px] shadow-lg transform transition-transform hover:scale-105 hover:shadow-2xl"
                 />
               </Link>
             ) : (
@@ -84,7 +84,7 @@ const OptionSection: React.FC = () => {
                 key={index}
                 title={option.title}
                 onClick={() => handleOptionClick(option)}
-                className="bg-gradient-to-br from-green-300 via-blue-200 to-purple-300 text-center p-8 rounded-xl shadow-lg transform transition-transform hover:scale-105 hover:shadow-2xl"
+                className="bg-gradient-to-br from-green-300 via-blue-200 to-purple-300 text-center p-8 rounded-[32px] shadow-lg transform transition-transform hover:scale-105 hover:shadow-2xl"
               />
             )
           )}

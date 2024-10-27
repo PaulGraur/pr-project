@@ -19,7 +19,7 @@ const Modal: React.FC<ModalProps> = ({ title, children, onClose }) => {
       onClick={onClose}
     >
       <motion.div
-        className="bg-white rounded-lg p-8 w-full max-w-lg mx-4 relative shadow-lg transform transition-all"
+        className="bg-white rounded-[32px] p-8 w-full max-w-lg mx-4 relative shadow-lg transform transition-all"
         initial={{ y: "-50vh" }}
         animate={{ y: 0 }}
         exit={{ y: "50vh" }}
