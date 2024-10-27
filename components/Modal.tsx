@@ -32,7 +32,7 @@ const Modal: React.FC<ModalProps> = ({ title, children, onClose }) => {
         >
           ✕
         </button>
-        <h2 className="text-2xl font-bold text-green-700 mb-4">{title}</h2>
+        <h2 className="text-center text-2xl font-bold text-green-700 mb-4">{title}</h2>
         <div className="text-gray-700 text-lg">{children}</div>
       </motion.div>
     </motion.div>

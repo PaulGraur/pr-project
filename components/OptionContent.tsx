@@ -1,4 +1,6 @@
+"use client";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface OptionContentProps {
   option: { title: string; content: string };
@@ -6,10 +8,13 @@ interface OptionContentProps {
 }
 
 const OptionContent: React.FC<OptionContentProps> = ({ option, onClose }) => {
+  const router = useRouter();
   const [selectedContractor, setSelectedContractor] = useState<string | null>(
     null
   );
   const [file, setFile] = useState<File | null>(null);
+  const [feedback, setFeedback] = useState("");
+  const [rating, setRating] = useState(0);
   const [isFileUploaded, setIsFileUploaded] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
@@ -23,45 +28,19 @@ const OptionContent: React.FC<OptionContentProps> = ({ option, onClose }) => {
     }
   };
 
-  const handleSelectContractor = (contractor: string) => {
-    setSelectedContractor(contractor);
-  };
-
-  const handleSubmit = () => {
-    if (selectedContractor && isFileUploaded) {
-      setShowSuccessMessage(true);
-    } else {
-      alert("Будь ласка, оберіть контрагента та завантажте файл.");
-    }
-  };
-
   const contractors = ["Контрагент 1", "Контрагент 2", "Контрагент 3"];
 
-  return (
-    <div>
-      {showSuccessMessage ? (
-        <div className="text-center">
-          <p className="text-green-600 text-lg font-semibold">
-            Дані успішно додано!
-          </p>
-          <button
-            onClick={onClose}
-            className="mt-4 bg-green-500 text-white px-5 py-2 rounded-lg shadow-lg hover:bg-green-600 transition duration-300"
-          >
-            Закрити
-          </button>
-        </div>
-      ) : (
-        <div>
-          <p className="text-gray-700 mb-6">{option.content}</p>
-
-          <div className="mb-6">
-            <label className="block text-gray-600 font-semibold mb-2">
+  const renderContent = () => {
+    switch (option.title) {
+      case "Фіксація договору":
+        return (
+          <div>
+            <label className="block text-gray-700 font-semibold mb-2">
               Оберіть контрагента:
             </label>
             <select
-              onChange={(e) => handleSelectContractor(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-300"
+              onChange={(e) => setSelectedContractor(e.target.value)}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400"
             >
               <option value="">Оберіть...</option>
               {contractors.map((contractor, index) => (
@@ -70,33 +49,54 @@ const OptionContent: React.FC<OptionContentProps> = ({ option, onClose }) => {
                 </option>
               ))}
             </select>
-          </div>
 
-          <div className="mb-6">
-            <label className="block text-gray-600 font-semibold mb-2">
+            <label className="block text-gray-700 font-semibold mt-4 mb-2">
               Завантажте файл (PDF):
             </label>
-            <div className="flex items-center">
-              <label className="bg-blue-500 text-white px-4 py-2 rounded-lg cursor-pointer shadow-md hover:bg-blue-600 transition duration-300">
-                Обрати файл
+            <div className="relative flex items-center border border-gray-300 rounded-lg overflow-hidden">
+              <label className="w-full flex justify-between items-center px-4 py-2 bg-gray-100 cursor-pointer hover:bg-gray-200 transition">
+                <span className="text-gray-700">
+                  {file ? file.name : "Файл не вибрано"}
+                </span>
                 <input
                   type="file"
                   accept=".pdf"
                   onChange={handleFileUpload}
                   className="hidden"
                 />
+                <span className="bg-blue-500 text-white px-3 py-2 rounded-r-lg">
+                  Обрати файл
+                </span>
               </label>
-              {isFileUploaded && (
-                <span className="text-gray-700 ml-4">{file?.name}</span>
-              )}
             </div>
+            {isFileUploaded && (
+              <p className="text-green-500 mt-2 font-semibold">
+                Файл завантажено: {file?.name}
+              </p>
+            )}
           </div>
+        );
 
+      // ... решта умов залишаються без змін
+    }
+  };
+
+  return (
+    <div>
+      <p className="text-gray-600 mb-6 text-center">{option.content}</p>
+
+      {renderContent()}
+
+      {showSuccessMessage && (
+        <div className="text-center mt-4">
+          <p className="text-green-600 text-lg font-semibold">
+            Дані успішно додано!
+          </p>
           <button
-            onClick={handleSubmit}
-            className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-semibold px-5 py-3 rounded-lg shadow-lg hover:from-blue-600 hover:to-indigo-600 transition duration-300 transform hover:scale-105"
+            onClick={onClose}
+            className="mt-4 bg-green-500 text-white px-5 py-2 rounded-lg shadow-lg hover:bg-green-600 transition duration-300"
           >
-            Підтвердити
+            Закрити
           </button>
         </div>
       )}

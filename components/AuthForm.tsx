@@ -55,7 +55,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ onAuthSuccess }) => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
+    <div className="container flex justify-center items-center mt-[60px] xl:mt-[100px]">
       <form
         onSubmit={handleAuth}
         className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md transform transition-all hover:shadow-3xl"
