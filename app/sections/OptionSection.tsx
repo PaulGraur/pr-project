@@ -8,6 +8,7 @@ import OptionContent from "@/components/OptionContent";
 interface Option {
   title: string;
   content: string;
+  link?: string;
 }
 
 const options: Option[] = [
@@ -18,27 +19,37 @@ const options: Option[] = [
   {
     title: "Аутсорсинг",
     content: "Можливості аутсорсингу для підвищення ефективності.",
+    link: "/outsourcing-page",
   },
   {
     title: "Клієнтська підтримка",
     content: "Підтримка та безпека для клієнтів.",
+    link: "/support-page",
   },
   {
     title: "Інститут професіоналів",
     content: "Розвиток співробітників та створення команди професіоналів.",
+    link: "/institute-professionals",
   },
   {
     title: "Бізнес коучинг",
     content: "Можливості бізнес коучингу для особистісного росту.",
+    link: "/business-coaching",
   },
   {
     title: "Маркетплейс",
     content: "Доступні продукти та послуги на платформі.",
+    link: "/marketplace-page",
   },
-  { title: "Форум", content: "Спільнота для обміну досвідом та обговорення." },
+  {
+    title: "Форум",
+    content: "Спільнота для обміну досвідом та обговорення.",
+    link: "/forum-page",
+  },
   {
     title: "Безпека розрахунків",
     content: "Заходи безпеки для фінансових операцій.",
+    link: "/payment-security",
   },
 ];
 
@@ -46,13 +57,7 @@ const OptionSection: React.FC = () => {
   const [selectedOption, setSelectedOption] = useState<Option | null>(null);
 
   const handleOptionClick = (option: Option) => {
-    if (
-      option.title !== "Форум" &&
-      option.title !== "Клієнтська підтримка" &&
-      option.title !== "Інститут професіоналів" &&
-      option.title !== "Бізнес коучинг" &&
-      option.title !== "Безпека розрахунків"
-    ) {
+    if (!option.link) {
       setSelectedOption(option);
     }
   };
@@ -62,38 +67,27 @@ const OptionSection: React.FC = () => {
   };
 
   return (
-    <section className="flex flex-col items-center mt-[40px] xl:mt-[100px]">
-      <div className="container flex flex-col items-center">
-        <h1 className="text-3xl font-bold text-green-800 text-center mb-10">
+    <section className="flex flex-col items-center px-4">
+      <div className="container flex flex-col items-center text-center">
+        <h1 className="text-4xl font-extrabold text-green-800 text-center mb-12 tracking-tight">
           Безпечна платформа для досягнення цілей
         </h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-4xl">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-6xl">
           {options.map((option, index) =>
-            option.title === "Форум" ? (
-              <Link href="/forum-page" key={index}>
-                <CustomOption title={option.title} onClick={() => {}} />
-              </Link>
-            ) : option.title === "Клієнтська підтримка" ? (
-              <Link href="/support-page" key={index}>
-                <CustomOption title={option.title} onClick={() => {}} />
-              </Link>
-            ) : option.title === "Інститут професіоналів" ? (
-              <Link href="/institute-professionals" key={index}>
-                <CustomOption title={option.title} onClick={() => {}} />
-              </Link>
-            ) : option.title === "Бізнес коучинг" ? (
-              <Link href="/business-coaching" key={index}>
-                <CustomOption title={option.title} onClick={() => {}} />
-              </Link>
-            ) : option.title === "Безпека розрахунків" ? (
-              <Link href="/payment-security" key={index}>
-                <CustomOption title={option.title} onClick={() => {}} />
+            option.link ? (
+              <Link href={option.link} key={index}>
+                <CustomOption
+                  title={option.title}
+                  onClick={() => {}}
+                  className="bg-gradient-to-br from-green-300 via-blue-200 to-purple-300 text-center p-8 rounded-xl shadow-lg transform transition-transform hover:scale-105 hover:shadow-2xl"
+                />
               </Link>
             ) : (
               <CustomOption
                 key={index}
                 title={option.title}
                 onClick={() => handleOptionClick(option)}
+                className="bg-gradient-to-br from-green-300 via-blue-200 to-purple-300 text-center p-8 rounded-xl shadow-lg transform transition-transform hover:scale-105 hover:shadow-2xl"
               />
             )
           )}

@@ -1,22 +1,23 @@
-"use client";
 import React from "react";
-import { motion } from "framer-motion";
 
 interface CustomOptionProps {
   title: string;
   onClick: () => void;
+  className?: string;
 }
 
-const CustomOption: React.FC<CustomOptionProps> = ({ title, onClick }) => {
+const CustomOption: React.FC<CustomOptionProps> = ({
+  title,
+  onClick,
+  className = "",
+}) => {
   return (
-    <motion.div
-      className="flex items-center justify-center bg-white p-6 rounded-xl shadow-md cursor-pointer text-center transition-all transform hover:scale-105 hover:shadow-lg border border-transparent hover:border-green-400 h-[120px]"
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
+    <div
       onClick={onClick}
+      className={`${className} cursor-pointer text-gray-800 hover:text-white font-semibold transition-all duration-300 rounded-lg transform hover:scale-105`}
     >
-      <h3 className="text-xl font-medium text-green-700">{title}</h3>
-    </motion.div>
+      <h3 className="text-xl font-bold">{title}</h3>
+    </div>
   );
 };
 
