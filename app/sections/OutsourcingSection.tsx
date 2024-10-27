@@ -133,7 +133,7 @@ const OutsourcingSection: React.FC = () => {
 
   return (
     <section className="container">
-      <div className="bg-gray-50 p-8 rounded-[32px] shadow-lg max-w-5xl mx-auto">
+      <div className="bg-gray-50 p-6 rounded-[32px] shadow-lg mx-auto">
         <h2 className="text-3xl font-bold text-green-700 text-center mb-6">
           Послуги Аутсорсингу
         </h2>

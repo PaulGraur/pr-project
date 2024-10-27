@@ -194,7 +194,7 @@ const MarketplaceSection: React.FC = () => {
 
   return (
     <section className="container">
-      <div className="p-6 max-w-5xl mx-auto bg-gradient-to-r from-green-50 to-blue-50 rounded-[32px] shadow-xl">
+      <div className="p-6 bg-gradient-to-r from-green-50 to-blue-50 rounded-[32px] shadow-xl">
         <h2 className="text-3xl font-bold text-center text-green-700 mb-6">
           Маркетплейс Безпечного Партнерства
         </h2>
