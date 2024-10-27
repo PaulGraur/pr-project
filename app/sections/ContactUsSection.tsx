@@ -9,12 +9,29 @@ const ContactUsSection: React.FC = () => {
   const [message, setMessage] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(true);
-    setName("");
-    setEmail("");
-    setMessage("");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, message }),
+      });
+
+      if (response.ok) {
+        setIsSubmitted(true);
+        setName("");
+        setEmail("");
+        setMessage("");
+      } else {
+        console.error("Failed to send data");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   const closeModal = () => {
