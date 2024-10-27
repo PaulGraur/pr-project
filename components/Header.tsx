@@ -55,7 +55,13 @@ const Header: React.FC = () => {
         </div>
 
         <div className="flex items-center space-x-4">
-          <div className="md:hidden">
+          <div className="flex gap-[12px] md:hidden">
+            <Image
+              src={Mops}
+              alt="Mops"
+              className="w-[40px] xl:w-[80px] md:block"
+            />
+
             <button
               onClick={toggleMenu}
               className="text-black focus:outline-none z-[1000] relative"
