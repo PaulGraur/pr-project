@@ -133,7 +133,7 @@ const InstituteProfessionalsSection: React.FC = () => {
 
   return (
     <section className="container">
-      <div className="bg-gray-50 p-6 rounded-lg shadow-lg mt-[60px] xl:mt-[100px]">
+      <div className="bg-gray-50 p-6 rounded-[32px] shadow-lg">
         <h2 className="text-2xl font-bold text-green-700 mb-6 text-center">
           Інститут професіоналів
         </h2>

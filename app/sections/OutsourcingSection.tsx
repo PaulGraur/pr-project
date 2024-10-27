@@ -122,113 +122,115 @@ const OutsourcingSection: React.FC = () => {
   );
 
   return (
-    <section className="bg-gray-50 p-8 rounded-lg shadow-lg max-w-5xl mx-auto">
-      <h2 className="text-3xl font-bold text-green-700 text-center mb-6">
-        Послуги Аутсорсингу
-      </h2>
+    <section className="container">
+      <div className="bg-gray-50 p-8 rounded-[32px] shadow-lg max-w-5xl mx-auto">
+        <h2 className="text-3xl font-bold text-green-700 text-center mb-6">
+          Послуги Аутсорсингу
+        </h2>
 
-      <div className="flex justify-between items-center mb-6">
-        <div className="flex items-center space-x-2">
-          <button
-            onClick={() => handleFilterChange("Все")}
-            className={`px-3 py-1 rounded-lg font-semibold ${
-              filter === "Все"
-                ? "bg-green-500 text-white"
-                : "bg-gray-200 text-gray-700"
-            }`}
-          >
-            Все
-          </button>
-          <button
-            onClick={() => handleFilterChange("Технічна підтримка")}
-            className={`px-3 py-1 rounded-lg font-semibold ${
-              filter === "Технічна підтримка"
-                ? "bg-green-500 text-white"
-                : "bg-gray-200 text-gray-700"
-            }`}
-          >
-            Технічна підтримка
-          </button>
-          <button
-            onClick={() => handleFilterChange("Маркетинг")}
-            className={`px-3 py-1 rounded-lg font-semibold ${
-              filter === "Маркетинг"
-                ? "bg-green-500 text-white"
-                : "bg-gray-200 text-gray-700"
-            }`}
-          >
-            Маркетинг
-          </button>
+        <div className="flex justify-between items-center mb-6">
+          <div className="flex flex-col gap-2 lg:flex-row lg:items-center space-x-2">
+            <button
+              onClick={() => handleFilterChange("Все")}
+              className={`px-3 py-1 rounded-lg font-semibold ${
+                filter === "Все"
+                  ? "bg-green-500 text-white"
+                  : "bg-gray-200 text-gray-700"
+              }`}
+            >
+              Все
+            </button>
+            <button
+              onClick={() => handleFilterChange("Технічна підтримка")}
+              className={`px-3 py-1 rounded-lg font-semibold ${
+                filter === "Технічна підтримка"
+                  ? "bg-green-500 text-white"
+                  : "bg-gray-200 text-gray-700"
+              }`}
+            >
+              Технічна підтримка
+            </button>
+            <button
+              onClick={() => handleFilterChange("Маркетинг")}
+              className={`px-3 py-1 rounded-lg font-semibold ${
+                filter === "Маркетинг"
+                  ? "bg-green-500 text-white"
+                  : "bg-gray-200 text-gray-700"
+              }`}
+            >
+              Маркетинг
+            </button>
+          </div>
         </div>
-      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        {filteredServices.map((service) => (
-          <div
-            key={service.id}
-            className="p-4 bg-white rounded-lg shadow-md hover:shadow-lg cursor-pointer transform hover:scale-105 transition duration-300"
-            onClick={() => handleSelectService(service)}
-          >
-            <h3 className="text-xl font-semibold text-blue-700">
-              {service.name}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          {filteredServices.map((service) => (
+            <div
+              key={service.id}
+              className="p-4 bg-white rounded-lg shadow-md hover:shadow-lg cursor-pointer transform hover:scale-105 transition duration-300"
+              onClick={() => handleSelectService(service)}
+            >
+              <h3 className="text-xl font-semibold text-blue-700">
+                {service.name}
+              </h3>
+              <p className="text-gray-500">{service.category}</p>
+              <p className="text-gray-700 mt-2">{service.description}</p>
+              <p className="text-green-600 mt-2 font-semibold">
+                Рейтинг: {service.rating} <FaStar className="inline" />
+              </p>
+            </div>
+          ))}
+        </div>
+
+        {selectedService && (
+          <div className="p-6 bg-white rounded-lg shadow-lg">
+            <h3 className="text-2xl font-bold text-blue-700">
+              {selectedService.name}
             </h3>
-            <p className="text-gray-500">{service.category}</p>
-            <p className="text-gray-700 mt-2">{service.description}</p>
+            <p className="text-gray-600">{selectedService.description}</p>
             <p className="text-green-600 mt-2 font-semibold">
-              Рейтинг: {service.rating} <FaStar className="inline" />
+              Рейтинг: {selectedService.rating} <FaStar className="inline" />
             </p>
-          </div>
-        ))}
-      </div>
 
-      {selectedService && (
-        <div className="p-6 bg-white rounded-lg shadow-lg">
-          <h3 className="text-2xl font-bold text-blue-700">
-            {selectedService.name}
-          </h3>
-          <p className="text-gray-600">{selectedService.description}</p>
-          <p className="text-green-600 mt-2 font-semibold">
-            Рейтинг: {selectedService.rating} <FaStar className="inline" />
-          </p>
-
-          <div className="mt-6">
-            <h4 className="text-xl font-semibold text-blue-700">Відгуки:</h4>
-            <div className="space-y-4">
-              {selectedService.reviews.map((review) => (
-                <div
-                  key={review.id}
-                  className="p-3 bg-gray-100 rounded-lg shadow-sm relative"
-                >
-                  <p className="font-semibold">{review.reviewer}:</p>
-                  <p>{review.comment}</p>
-                  <p>Оцінка: {review.rating} / 5</p>
-                  <button
-                    onClick={() => handleLikeReview(review.id)}
-                    className="absolute top-3 right-3 text-green-500 flex items-center"
+            <div className="mt-6">
+              <h4 className="text-xl font-semibold text-blue-700">Відгуки:</h4>
+              <div className="space-y-4">
+                {selectedService.reviews.map((review) => (
+                  <div
+                    key={review.id}
+                    className="p-3 bg-gray-100 rounded-lg shadow-sm relative"
                   >
-                    <FaThumbsUp className="mr-1" /> {review.likes}
-                  </button>
-                </div>
-              ))}
-            </div>
+                    <p className="font-semibold">{review.reviewer}:</p>
+                    <p>{review.comment}</p>
+                    <p>Оцінка: {review.rating} / 5</p>
+                    <button
+                      onClick={() => handleLikeReview(review.id)}
+                      className="absolute top-3 right-3 text-green-500 flex items-center"
+                    >
+                      <FaThumbsUp className="mr-1" /> {review.likes}
+                    </button>
+                  </div>
+                ))}
+              </div>
 
-            <div className="mt-4">
-              <textarea
-                value={newReview}
-                onChange={(e) => setNewReview(e.target.value)}
-                className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
-                placeholder="Напишіть відгук..."
-              />
-              <button
-                onClick={handleAddReview}
-                className="mt-4 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition duration-300"
-              >
-                Додати відгук
-              </button>
+              <div className="mt-4">
+                <textarea
+                  value={newReview}
+                  onChange={(e) => setNewReview(e.target.value)}
+                  className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+                  placeholder="Напишіть відгук..."
+                />
+                <button
+                  onClick={handleAddReview}
+                  className="mt-4 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition duration-300"
+                >
+                  Додати відгук
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </section>
   );
 };

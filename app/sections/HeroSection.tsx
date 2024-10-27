@@ -1,5 +1,7 @@
 "use client";
 import React from "react";
+import Image from "next/image";
+import Logo from "@/images/AV-S.jpg";
 
 const HeroSection: React.FC = () => {
   const handleScrollToContact = () => {
@@ -10,9 +12,9 @@ const HeroSection: React.FC = () => {
   };
 
   return (
-    <section className="container ">
-      <div className="container mx-auto flex flex-col md:flex-row items-center justify-center rounded-[20px] mt-[40px] bg-gradient-to-r from-green-500 via-blue-500 to-purple-500 text-white py-20 px-6 text-center md:text-left">
-        <div className="md:w-1/2 mb-10 md:mb-0">
+    <section className="container">
+      <div className="mx-auto flex flex-col gap-[20px] lg:flex-row items-center justify-center rounded-[32px] bg-gradient-to-r from-green-500 via-blue-500 to-purple-500 text-white py-20 px-6 text-center md:text-left">
+        <div className="w-[100%] lg:w-1/2 mb-10 md:mb-0">
           <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
             Ваша безпечна платформа для досягнення цілей
           </h1>
@@ -29,11 +31,7 @@ const HeroSection: React.FC = () => {
           </button>
         </div>
         <div className="md:w-1/2">
-          <img
-            src="/hero-image.png"
-            alt="Hero Image"
-            className="w-full rounded-lg shadow-lg"
-          />
+          <Image src={Logo} alt="logo" className="rounded-[32px]" />
         </div>
       </div>
     </section>

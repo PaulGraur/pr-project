@@ -24,7 +24,7 @@ export default function Home() {
   return (
     <>
       {isAuthenticated ? (
-        <div className="flex flex-col gap-[100px]">
+        <div className="">
           <HeroSection />
           <OptionSection />
           <ContactUsSection />
