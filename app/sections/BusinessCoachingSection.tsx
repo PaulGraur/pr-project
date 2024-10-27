@@ -139,7 +139,7 @@ const BusinessCoachingSection: React.FC = () => {
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
-            className="px-4 py-2 border rounded-lg"
+            className="px-4 py-2 border rounded-[32px]"
           >
             {categories.map((category, index) => (
               <option key={index} value={category}>
@@ -150,7 +150,7 @@ const BusinessCoachingSection: React.FC = () => {
           <select
             value={sortOption}
             onChange={(e) => setSortOption(e.target.value)}
-            className="px-4 py-2 border rounded-lg"
+            className="px-4 py-2 border rounded-[32px]"
           >
             <option value="rating">Сортувати за рейтингом</option>
             <option value="title">Сортувати за назвою</option>
@@ -161,7 +161,7 @@ const BusinessCoachingSection: React.FC = () => {
           {sortedCoachings.map((coaching) => (
             <div
               key={coaching.id}
-              className="p-4 border border-gray-300 rounded-lg hover:shadow-lg transition cursor-pointer relative"
+              className="p-4 border border-gray-300 rounded-[32px] hover:shadow-lg transition cursor-pointer relative"
               onClick={() => toggleCoachingExpansion(coaching.id)}
             >
               <h3 className="text-lg font-semibold text-blue-700">
@@ -185,7 +185,7 @@ const BusinessCoachingSection: React.FC = () => {
               </button>
 
               {expandedCoachingIds.includes(coaching.id) && (
-                <div className="mt-6 p-4 bg-white rounded-lg shadow-lg">
+                <div className="mt-6 p-4 bg-white rounded-[32px] shadow-lg">
                   <h3 className="text-xl font-bold text-blue-700">
                     {coaching.title}
                   </h3>
@@ -203,7 +203,7 @@ const BusinessCoachingSection: React.FC = () => {
                         e.stopPropagation();
                         handleRegister(coaching.id);
                       }}
-                      className="mt-4 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition duration-300"
+                      className="mt-4 bg-green-500 text-white px-4 py-2 rounded-[32px] hover:bg-green-600 transition duration-300"
                     >
                       Зареєструватися
                     </button>
@@ -219,7 +219,7 @@ const BusinessCoachingSection: React.FC = () => {
                     <textarea
                       value={newFeedback}
                       onChange={(e) => setNewFeedback(e.target.value)}
-                      className="w-full mt-4 p-2 border rounded-lg"
+                      className="w-full mt-4 p-2 border rounded-[32px]"
                       placeholder="Залиште ваш відгук..."
                     />
                     <button
@@ -227,7 +227,7 @@ const BusinessCoachingSection: React.FC = () => {
                         e.stopPropagation();
                         handleAddFeedback(coaching.id);
                       }}
-                      className="mt-2 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300"
+                      className="mt-2 bg-blue-500 text-white px-4 py-2 rounded-[32px] hover:bg-blue-600 transition duration-300"
                     >
                       Додати відгук
                     </button>
@@ -250,7 +250,7 @@ const BusinessCoachingSection: React.FC = () => {
                     <textarea
                       value={newQuestion}
                       onChange={(e) => setNewQuestion(e.target.value)}
-                      className="w-full mt-2 p-2 border rounded-lg"
+                      className="w-full mt-2 p-2 border rounded-[32px]"
                       placeholder="Задайте питання..."
                     />
                     <button
@@ -258,7 +258,7 @@ const BusinessCoachingSection: React.FC = () => {
                         e.stopPropagation();
                         handleAddQuestion(coaching.id);
                       }}
-                      className="mt-2 bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600 transition duration-300"
+                      className="mt-2 bg-purple-500 text-white px-4 py-2 rounded-[32px] hover:bg-purple-600 transition duration-300"
                     >
                       Додати питання
                     </button>
@@ -269,7 +269,7 @@ const BusinessCoachingSection: React.FC = () => {
                       e.stopPropagation();
                       toggleCoachingExpansion(coaching.id);
                     }}
-                    className="mt-4 bg-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-400 transition duration-300"
+                    className="mt-4 bg-gray-300 text-gray-700 px-4 py-2 rounded-[32px] hover:bg-gray-400 transition duration-300"
                   >
                     Закрити
                   </button>

@@ -142,7 +142,7 @@ const OutsourcingSection: React.FC = () => {
           <div className="flex flex-col gap-2 lg:flex-row lg:items-center space-x-2">
             <button
               onClick={() => handleFilterChange("Все")}
-              className={`px-3 py-1 rounded-lg font-semibold ${
+              className={`px-3 py-1 rounded-[32px] font-semibold ${
                 filter === "Все"
                   ? "bg-green-500 text-white"
                   : "bg-gray-200 text-gray-700"
@@ -152,7 +152,7 @@ const OutsourcingSection: React.FC = () => {
             </button>
             <button
               onClick={() => handleFilterChange("Технічна підтримка")}
-              className={`px-3 py-1 rounded-lg font-semibold ${
+              className={`px-3 py-1 rounded-[32px] font-semibold ${
                 filter === "Технічна підтримка"
                   ? "bg-green-500 text-white"
                   : "bg-gray-200 text-gray-700"
@@ -162,7 +162,7 @@ const OutsourcingSection: React.FC = () => {
             </button>
             <button
               onClick={() => handleFilterChange("Маркетинг")}
-              className={`px-3 py-1 rounded-lg font-semibold ${
+              className={`px-3 py-1 rounded-[32px] font-semibold ${
                 filter === "Маркетинг"
                   ? "bg-green-500 text-white"
                   : "bg-gray-200 text-gray-700"
@@ -177,7 +177,7 @@ const OutsourcingSection: React.FC = () => {
           {filteredServices.map((service) => (
             <div
               key={service.id}
-              className="p-4 bg-white rounded-lg shadow-md hover:shadow-lg cursor-pointer transform hover:scale-105 transition duration-300"
+              className="p-4 bg-white rounded-[32px] shadow-md hover:shadow-lg cursor-pointer transform hover:scale-105 transition duration-300"
               onClick={() => toggleServiceExpansion(service.id)}
             >
               <h3 className="text-xl font-semibold text-blue-700">
@@ -190,7 +190,7 @@ const OutsourcingSection: React.FC = () => {
               </p>
 
               {expandedServiceIds.includes(service.id) && (
-                <div className="mt-4 p-4 bg-gray-100 rounded-lg shadow-inner">
+                <div className="mt-4 p-4 bg-gray-100 rounded-[32px] shadow-inner">
                   <h4 className="text-xl font-semibold text-blue-700">
                     Відгуки:
                   </h4>
@@ -198,7 +198,7 @@ const OutsourcingSection: React.FC = () => {
                     {service.reviews.map((review) => (
                       <div
                         key={review.id}
-                        className="p-3 bg-white rounded-lg shadow-sm relative"
+                        className="p-3 bg-white rounded-[32px] shadow-sm relative"
                       >
                         <p className="font-semibold">{review.reviewer}:</p>
                         <p>{review.comment}</p>
@@ -220,7 +220,7 @@ const OutsourcingSection: React.FC = () => {
                     <textarea
                       value={newReview}
                       onChange={(e) => setNewReview(e.target.value)}
-                      className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+                      className="w-full p-3 border rounded-[32px] focus:outline-none focus:ring-2 focus:ring-green-400"
                       placeholder="Напишіть відгук..."
                     />
                     <button
@@ -228,7 +228,7 @@ const OutsourcingSection: React.FC = () => {
                         e.stopPropagation();
                         handleAddReview(service.id);
                       }}
-                      className="mt-4 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition duration-300"
+                      className="mt-4 bg-green-500 text-white px-4 py-2 rounded-[32px] hover:bg-green-600 transition duration-300"
                     >
                       Додати відгук
                     </button>

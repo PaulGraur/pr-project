@@ -78,7 +78,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ onAuthSuccess }) => {
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 shadow-sm transition duration-300"
+            className="w-full px-4 py-3 border rounded-[32px] focus:outline-none focus:ring-2 focus:ring-green-500 shadow-sm transition duration-300"
           />
         </div>
 
@@ -90,7 +90,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ onAuthSuccess }) => {
             type={showPassword ? "text" : "password"}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 shadow-sm transition duration-300"
+            className="w-full px-4 py-3 border rounded-[32px] focus:outline-none focus:ring-2 focus:ring-green-500 shadow-sm transition duration-300"
           />
           <button
             type="button"
@@ -115,7 +115,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ onAuthSuccess }) => {
                 type={showConfirmPassword ? "text" : "password"}
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 shadow-sm transition duration-300"
+                className="w-full px-4 py-3 border rounded-[32px] focus:outline-none focus:ring-2 focus:ring-green-500 shadow-sm transition duration-300"
               />
               <button
                 type="button"
@@ -154,7 +154,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ onAuthSuccess }) => {
         <button
           type="submit"
           disabled={isRegistering && !isAgreed} 
-          className={`w-full font-bold py-3 rounded-lg transition duration-300 shadow-md hover:shadow-lg ${
+          className={`w-full font-bold py-3 rounded-[32px] transition duration-300 shadow-md hover:shadow-lg ${
             isRegistering && !isAgreed
               ? "bg-gray-300 text-gray-500 cursor-not-allowed"
               : "bg-gradient-to-r from-green-500 to-blue-500 text-white hover:from-green-600 hover:to-blue-600"

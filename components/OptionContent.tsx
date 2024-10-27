@@ -9,7 +9,9 @@ interface OptionContentProps {
 
 const OptionContent: React.FC<OptionContentProps> = ({ option, onClose }) => {
   const router = useRouter();
-  const [selectedContractor, setSelectedContractor] = useState<string | null>(null);
+  const [selectedContractor, setSelectedContractor] = useState<string | null>(
+    null
+  );
   const [file, setFile] = useState<File | null>(null);
   const [feedback, setFeedback] = useState("");
   const [rating, setRating] = useState(0);
@@ -52,7 +54,7 @@ const OptionContent: React.FC<OptionContentProps> = ({ option, onClose }) => {
             <select
               value={selectedContractor || ""}
               onChange={(e) => setSelectedContractor(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400"
+              className="w-full px-4 py-2 border border-gray-300 rounded-[32px] focus:ring-2 focus:ring-blue-400"
             >
               <option value="">Оберіть...</option>
               {contractors.map((contractor, index) => (
@@ -65,7 +67,7 @@ const OptionContent: React.FC<OptionContentProps> = ({ option, onClose }) => {
             <label className="block text-gray-700 font-semibold mt-4 mb-2">
               Завантажте файл (PDF):
             </label>
-            <div className="relative flex items-center border border-gray-300 rounded-lg overflow-hidden">
+            <div className="relative flex items-center border border-gray-300 rounded-[32px] overflow-hidden">
               <label className="w-full flex justify-between items-center px-4 py-2 bg-gray-100 cursor-pointer hover:bg-gray-200 transition">
                 <span className="text-gray-700">
                   {file ? file.name : "Файл не вибрано"}
@@ -102,7 +104,7 @@ const OptionContent: React.FC<OptionContentProps> = ({ option, onClose }) => {
 
       <button
         onClick={handleSubmitData}
-        className="w-full bg-green-500 text-white mt-6 py-2 rounded-lg shadow-lg hover:bg-green-600 transition duration-300"
+        className="w-full bg-green-500 text-white mt-6 py-2 rounded-[32px] shadow-lg hover:bg-green-600 transition duration-300"
       >
         Відправити дані
       </button>
@@ -114,7 +116,7 @@ const OptionContent: React.FC<OptionContentProps> = ({ option, onClose }) => {
           </p>
           <button
             onClick={onClose}
-            className="mt-4 bg-green-500 text-white px-5 py-2 rounded-lg shadow-lg hover:bg-green-600 transition duration-300"
+            className="mt-4 bg-green-500 text-white px-5 py-2 rounded-[32px] shadow-lg hover:bg-green-600 transition duration-300"
           >
             Закрити
           </button>

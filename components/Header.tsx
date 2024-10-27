@@ -47,7 +47,7 @@ const Header: React.FC = () => {
           </div>
           <button
             onClick={handleLogout}
-            className="hidden md:block text-black px-4 py-2 rounded-lg"
+            className="hidden md:block text-black px-4 py-2 rounded-[32px]"
           >
             Вийти
           </button>
@@ -89,7 +89,7 @@ const Header: React.FC = () => {
             handleLogout();
             toggleMenu();
           }}
-          className="mt-6 bg-red-500 text-white px-4 py-2 rounded-lg shadow-lg hover:bg-red-600 transition duration-300"
+          className="mt-6 bg-red-500 text-white px-4 py-2 rounded-[32px] shadow-lg hover:bg-red-600 transition duration-300"
         >
           Вийти
         </button>
