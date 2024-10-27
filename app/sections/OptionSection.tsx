@@ -1,9 +1,14 @@
 "use client";
 import React, { useState } from "react";
-import CustomOption from "./CustomOption";
-import Modal from "./Modal";
+import CustomOption from "@/components/CustomOption";
+import Modal from "@/components/Modal";
 
-const options = [
+interface Option {
+  title: string;
+  content: string;
+}
+
+const options: Option[] = [
   {
     title: "Фіксація договору",
     content: "Вибір контрагента та завантаження файлу у форматі PDF.",
@@ -35,10 +40,10 @@ const options = [
   },
 ];
 
-const OptionSection = () => {
-  const [selectedOption, setSelectedOption] = useState(null);
+const OptionSection: React.FC = () => {
+  const [selectedOption, setSelectedOption] = useState<Option | null>(null);
 
-  const handleOptionClick = (option) => {
+  const handleOptionClick = (option: Option) => {
     setSelectedOption(option);
   };
 
@@ -47,25 +52,27 @@ const OptionSection = () => {
   };
 
   return (
-    <div className="flex flex-col items-center p-8 bg-gray-100 min-h-screen">
-      <h1 className="text-2xl font-bold text-center mb-8">
-        Безпечна платформа для досягнення цілей
-      </h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-3xl">
-        {options.map((option, index) => (
-          <CustomOption
-            key={index}
-            title={option.title}
-            onClick={() => handleOptionClick(option)}
-          />
-        ))}
+    <section className="flex flex-col items-center mt-[100px]">
+      <div className="container flex flex-col items-center">
+        <h1 className="text-3xl font-bold text-green-800 text-center mb-10">
+          Безпечна платформа для досягнення цілей
+        </h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-4xl">
+          {options.map((option, index) => (
+            <CustomOption
+              key={index}
+              title={option.title}
+              onClick={() => handleOptionClick(option)}
+            />
+          ))}
+        </div>
+        {selectedOption && (
+          <Modal title={selectedOption.title} onClose={closeModal}>
+            <p className="text-gray-700 text-lg">{selectedOption.content}</p>
+          </Modal>
+        )}
       </div>
-      {selectedOption && (
-        <Modal title={selectedOption.title} onClose={closeModal}>
-          <p>{selectedOption.content}</p>
-        </Modal>
-      )}
-    </div>
+    </section>
   );
 };
 
