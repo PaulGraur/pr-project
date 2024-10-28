@@ -41,27 +41,13 @@ const Header: React.FC = () => {
     <header className="px-4 pt-4">
       <div className="rounded-[32px] bg-white w-full p-4 flex justify-between items-center shadow-md">
         <div className="flex items-center">
-          <Link href={"/"}>
-            <Image src={Logo} alt="Logo" className="w-[100px]" />
-          </Link>
-          <span className="font-bold text-[20px]">&</span>
-          <Link href={"/"} className="ml-[12px]">
-            <Image
-              src={MoMo}
-              alt="Momo logo"
-              className="w-[60px] xl:w-[100px]"
-            />
+          <Link href={"/"} className="ml-[12px] font-bold text-[20px]">
+            Synergy
           </Link>
         </div>
 
         <div className="flex items-center space-x-4">
           <div className="flex gap-[12px] md:hidden">
-            <Image
-              src={Mops}
-              alt="Mops"
-              className="w-[40px] xl:w-[80px] md:block"
-            />
-
             <button
               onClick={toggleMenu}
               className="text-black focus:outline-none z-[1000] relative"
@@ -70,12 +56,6 @@ const Header: React.FC = () => {
             </button>
           </div>
           <>
-            <Image
-              src={Mops}
-              alt="Mops"
-              className="hidden w-[40px] xl:w-[80px] md:block"
-            />
-
             <button
               onClick={handleLogout}
               className="hidden md:block text-black px-4 py-2 rounded-[32px]"
