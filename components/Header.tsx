@@ -1,11 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { FiMenu, FiX } from "react-icons/fi";
-import Logo from "@/images/av-logo.png";
-import MoMo from "@/images/MoMoLogo.png";
-import Mops from "@/images/MopsLogo.png";
 
 const navigationLinks = [
   { title: "Головна", href: "/" },
@@ -37,6 +33,18 @@ const Header: React.FC = () => {
     setIsMenuOpen((prev) => !prev);
   };
 
+  useEffect(() => {
+    if (isMenuOpen || showAuthModal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isMenuOpen, showAuthModal]);
+
   return (
     <header className="px-4 pt-4">
       <div className="rounded-[32px] bg-white w-full p-4 flex justify-between items-center shadow-md">
@@ -49,28 +57,37 @@ const Header: React.FC = () => {
         <div className="flex items-center space-x-4">
           <div className="flex gap-[12px] md:hidden">
             <button
-              onClick={toggleMenu}
+              onClick={() => {
+                if (isAuthenticated) {
+                  toggleMenu();
+                } else {
+                  setShowAuthModal(true);
+                }
+              }}
               className="text-black focus:outline-none z-[1000] relative"
             >
               {isMenuOpen ? <FiX size={28} /> : <FiMenu size={28} />}
             </button>
           </div>
-          <>
+          {isAuthenticated && (
             <button
               onClick={handleLogout}
               className="hidden md:block text-black px-4 py-2 rounded-[32px]"
             >
               Вийти
             </button>
-          </>
+          )}
         </div>
       </div>
 
       <div
-        className={`fixed inset-0 bg-opacity-50 z-50 transition-opacity duration-300 ease-in-out ${
-          isMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+        className={`fixed inset-0 bg-black bg-opacity-50 z-40 ${
+          isMenuOpen || showAuthModal ? "block" : "hidden"
         }`}
-        onClick={toggleMenu}
+        onClick={() => {
+          setIsMenuOpen(false);
+          setShowAuthModal(false);
+        }}
       ></div>
 
       <div
@@ -78,12 +95,6 @@ const Header: React.FC = () => {
           isMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        {/* <button
-          onClick={toggleMenu}
-          className="text-gray-500 hover:text-gray-700 focus:outline-none"
-        >
-          <FiX size={24} />
-        </button> */}
         <nav className="flex flex-col divide-y divide-gray-300 mt-4">
           {navigationLinks.map((link, index) => (
             <Link href={link.href} key={index}>
@@ -106,6 +117,24 @@ const Header: React.FC = () => {
           Вийти
         </button>
       </div>
+
+      {showAuthModal && (
+        <div className="fixed inset-0 z-50 flex justify-center items-center">
+          <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
+            <h3 className="text-xl font-semibold mb-4 text-center text-gray-800">
+              Для доступу до меню, будь ласка, увійдіть або зареєструйтесь
+            </h3>
+            <div className="flex justify-center mt-4">
+              <button
+                onClick={() => setShowAuthModal(false)}
+                className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition duration-300"
+              >
+                Закрити
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
 };
