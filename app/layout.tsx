@@ -8,8 +8,8 @@ import { MantineProvider } from "@mantine/core";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Avtovin - Безпечна Платформа",
-  description: "Безпечна Платформа досягнення цілей Avtovin",
+  title: "Synergy - Безпечна Платформа",
+  description: "Безпечна Платформа досягнення цілей Synergy",
 };
 
 export default function RootLayout({

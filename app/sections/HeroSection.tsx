@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import Logo from "@/images/AV-S.jpg";
+import Logo from "@/images/team-synergy.png";
 
 const HeroSection: React.FC = () => {
   const handleScrollToContact = () => {
